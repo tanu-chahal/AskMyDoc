@@ -1,0 +1,11 @@
+credentials.json
+
+./node_modules
+/node_modules
+node_modules
+
+.env
+
+./uploads
+/uploads
+uploads
