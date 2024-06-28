@@ -25,8 +25,12 @@ const chain = await createStuffDocumentsChain({
 })
 
 export async function getAnswer(pdfText, question){
+  console.log("No. of Characters in context: ",pdfText.length)
+  console.log("--------------------------------------------------------------------------------------------------------------")
+  console.log(question)
+  console.log("--------------------------------------------------------------------------------------------------------------")
   const parser = new StringOutputParser();
-  const doc = new Document({pageContent: pdfText})
+  const doc = new Document({pageContent: pdfText, })
   const response = await chain.invoke({input: question, context: [doc]});
   const ans = await parser.invoke(response);
   console.log(ans);

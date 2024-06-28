@@ -79,18 +79,21 @@ function App() {
   };
 
   const handleAskQuestion = async () => {
-    if (!question) return;
+    if (!question || isWriting) return;
+    const userQuestion = question
     console.log(question)
     setIsWriting(true);
     setError('');
+    setQuestion("writing...")
     setChats(p=>[...p, {chat: question, by:"User"}]);
     try {
       const response = await axios.post('http://localhost:4000/ask', {
-        question,
-        fileName,
+        question: userQuestion,
+        filename: fileName,
       });
 
-      const answer = response.data.answer; // Assuming the server response contains an 'answer' field
+      const answer = response.data.answer;
+      await new Promise(resolve => setTimeout(resolve, 5000)); //just to make user wait so that my reqs quota doesn't exceed.
       setChats(p=>[...p, { chat: answer, by: "AI" }]);
     } catch (err) {
       setError('Error asking question');
@@ -135,19 +138,11 @@ function App() {
             </div> : <div className="bot w-10 h-10 rounded-full flex items-center justify-center self-start">
               <img className="w-10 h-10" src="/assets/Bot-Logo.svg" alt="Bot" />
             </div>}
-            <p className="msgContent text-secondary-clr text-sm">{c.chat}</p>
+            <p className="msgContent text-secondary-clr text-sm text-wrap w-full">{c.chat}</p>
           </div>)}
-          {/* <div className="msg flex gap-5 items-center">
-            <div className="bot w-10 h-10 rounded-full flex items-center justify-center self-start">
-              <img className="w-10 h-10" src="/assets/Bot-Logo.svg" alt="Bot" />
-            </div>
-            <p className="msgContent text-secondary-clr text-sm text-wrap w-full">
-              Our own Large Language Model (LLM) is a type of AI that can learn from data. We have trained it on 7 billion parameters which makes it better than other LLMs. We are featured on aiplanet.com and work with leading enterprises to help them use AI securely and privately. We have a Generative AI Stack which helps reduce the hallucinations in LLMs and allows enterprises to use AI in their applications.
-            </p>
-          </div> */}
         </div>
         <div className="inputbox w-full relative md:w-2/3">
-          <input disabled={!fileName} className="h-10 p-4 pr-10 outline-none rounded border border-quarternary-clr w-full text-secondary-clr" type="text" placeholder="Send a message..." value={question} onChange={(e)=>{setQuestion(e.target.value)}} />
+          <input disabled={!fileName || isWriting} className="h-10 p-4 pr-10 outline-none rounded border border-quarternary-clr w-full text-secondary-clr" type="text" placeholder="Send a message..." value={question} onChange={(e)=>{setQuestion(e.target.value)}} />
           <img className="absolute top-0 right-2 bottom-0 mt-auto mb-auto cursor-pointer" src="/assets/Send-Icon.svg" alt="Send" onClick={handleAskQuestion}/>
         </div>
       </div>
