@@ -2,6 +2,12 @@
 
 AskMyDoc is an AI-powered application that allows users to upload PDF documents and ask questions based on the content of those documents. It uses a combination of frontend technologies (React, Axios and TailwindCSS) and backend technologies (Node.js, Express.js, Langchain, Google Vertex AI, pdfreader, and multer) to provide this functionality.
 
+![Preview](./client/ui/public/assets/Preview-Image.jpeg)
+
+[Visit Live App](https://ask-my-doc.vercel.app/) or (https://ask-my-doc.vercel.app/)
+
+**Note:** Sending frequent questions might exceed requests quota please take care of that.
+
 ## Technologies Used
 
 - **Frontend**: React, TailwindCSS, Axios
