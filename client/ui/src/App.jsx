@@ -56,7 +56,7 @@ function App() {
     formData.append('pdf', file);
     console.log(formData)
 
-    axios.post('http://localhost:4000/upload',formData, {
+    axios.post(`${import.meta.env.VITE_BACKEND_API}/upload`,formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -87,7 +87,7 @@ function App() {
     setQuestion("writing...")
     setChats(p=>[...p, {chat: question, by:"User"}]);
     try {
-      const response = await axios.post('http://localhost:4000/ask', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/ask`, {
         question: userQuestion,
         filename: fileName,
       });
