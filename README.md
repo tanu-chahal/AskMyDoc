@@ -4,6 +4,8 @@ AskMyDoc is an AI-powered application that allows users to upload PDF documents 
 
 ![Preview](./client/ui/public/assets/Preview-Image.jpeg)
 
+[See Preview](https://vimeo.com/971623115)
+
 [Visit Live App](https://ask-my-doc.vercel.app/) or (https://ask-my-doc.vercel.app/)
 
 **Note:** Sending frequent questions might exceed requests quota please take care of that.
